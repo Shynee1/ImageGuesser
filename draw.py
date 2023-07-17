@@ -1,6 +1,6 @@
 from tkinter import *
 import tensorflow as tf
-from PIL import Image, ImageDraw, ImageGrab
+from PIL import Image, ImageTk
 import numpy as np
 import process
 import random
@@ -62,12 +62,19 @@ class Draw():
         self.background.delete("all")
         self.strokes = []
 
+    def create_new_objects(self, nested_list):
+        if isinstance(nested_list, list):
+            return [self.create_new_objects(item) for item in nested_list]
+        else:
+            return nested_list
+
     def mouse_lift(self, event):
         self.strokes.append([self.x, self.y])
         self.x = []
         self.y = []
 
-        image = process.processStrokes(self.strokes)
+        s = self.create_new_objects(self.strokes)
+        image = process.processStrokes(s)
 
         img = np.array(image)
         img = (img.astype('float32')) / 255
