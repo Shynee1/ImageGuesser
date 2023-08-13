@@ -86,21 +86,35 @@ class Draw():
         print(max(pred))
         
         if pred_class == 0.0:
-            self.guess_text.config(text="Guess: Bandage")
+            self.guess_text.config(text="Guess: Banana")
         elif pred_class == 1.0:
-            self.guess_text.config(text="Guess: Cell Phone")
+            self.guess_text.config(text="Guess: Bandage")
         elif pred_class == 2.0:
-            self.guess_text.config(text="Guess: Hamburger")
+            self.guess_text.config(text="Guess: Book")
         elif pred_class == 3.0:
-            self.guess_text.config(text="Guess: Pizza")
+            self.guess_text.config(text="Guess: Cake")
         elif pred_class == 4.0:
-            self.guess_text.config(text="Guess: Sailboat")
+            self.guess_text.config(text="Guess: Camera")
         elif pred_class == 5.0:
-            self.guess_text.config(text="Guess: Sheep")
+            self.guess_text.config(text="Guess: Cell Phone")
         elif pred_class == 6.0:
-            self.guess_text.config(text="Guess: Star")
+            self.guess_text.config(text="Guess: Face")
         elif pred_class == 7.0:
-            self.guess_text.config(text="Guess: Television")
+            self.guess_text.config(text="Guess: Hamburger")
+        elif pred_class == 8.0:
+            self.guess_text.config(text="Guess: Pizza")
+        elif pred_class == 9.0:
+            self.guess_text.config(text="Guess: Sailboat")
+        elif pred_class == 10.0:
+            self.guess_text.config(text="Guess: Sheep")
+        elif pred_class == 11.0:
+            self.guess_text.config(text="Guess: Star")
+        elif pred_class == 12.0:
+            self.guess_text.config(text="Guess: Sword")
+        elif pred_class == 13.0:
+            self.guess_text.config(text="Guess: Televison")
+        elif pred_class == 14.0:
+            self.guess_text.config(text="Guess: Effiel Tower")
         else:
             print(pred_class)
 
@@ -118,6 +132,6 @@ class Draw():
 
 if __name__ == "__main__":
     root = Tk()
-    draw = ["Bandage", "Cell Phone", "Hamburger", "Pizza", "Sailboat", "Sheep", "Star", "Television"]
+    draw = ["Banana", "Bandage", "Book", "Cake", "Camera", "Cell Phone", "Face", "Hamburger", "Pizza", "Sailboat", "Sheep", "Star", "Sword", "Television", "The Effiel Tower"]
     p = Draw(root, random.choice(draw))
     root.mainloop()

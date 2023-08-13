@@ -11,7 +11,7 @@ import pickle
 from keras.callbacks import TensorBoard
 
 def keras_model(image_x, image_y):
-    num_of_classes = 8
+    num_of_classes = 15
     model = Sequential()
     model.add(Conv2D(32, (5, 5), input_shape=(image_x,image_y,1), activation='relu'))
     model.add(MaxPooling2D(pool_size=(2, 2), strides=(2, 2), padding='same'))
@@ -64,7 +64,7 @@ def main():
     model.summary()
 
     # train model
-    model.fit(train_x, train_y, validation_data=(test_x, test_y), epochs=10, batch_size=64,
+    model.fit(train_x, train_y, validation_data=(test_x, test_y), epochs=3   , batch_size=64,
               callbacks=[TensorBoard(log_dir="QuickDraw")])
     
     model.save('models/QuickDraw.h5')
