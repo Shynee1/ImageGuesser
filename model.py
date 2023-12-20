@@ -10,6 +10,7 @@ from keras.callbacks import ModelCheckpoint
 import pickle
 from keras.callbacks import TensorBoard
 
+# Create convolutional neural network with Keras
 def keras_model(image_x, image_y):
     num_of_classes = 15
     model = Sequential()
@@ -32,7 +33,7 @@ def keras_model(image_x, image_y):
 
     return model, callbacks_list
 
-
+# Loads data from pickle (python data format)
 def loadFromPickle():
     with open("features", "rb") as f:
         features = np.array(pickle.load(f))
@@ -41,8 +42,10 @@ def loadFromPickle():
 
     return features, labels
 
+# Converts labels to one-hot matrix
 def prepress_labels(labels):
     labels = np_utils.to_categorical(labels)
+    print(labels)
     return labels
 
 
@@ -51,8 +54,9 @@ def main():
     features, labels = loadFromPickle()
     # Shuffle data
     features, labels = shuffle(features, labels)
-    # No clue
+    # Convert to one-hot matrix
     labels = prepress_labels(labels)
+
     # Split into test/train
     train_x, test_x, train_y, test_y = train_test_split(features, labels, random_state=0,test_size=0.3)
 

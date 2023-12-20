@@ -7,7 +7,6 @@ def processStrokes(strokes):
     
     align_to_corner(strokes)
     scale_image(strokes)
-    #strokes = [resample_stroke(stroke) for stroke in strokes]
     for i in range(len(strokes)):
         strokes[i] = rdp.rdp(strokes[i], epsilon=2.0)
 
@@ -50,28 +49,6 @@ def vector_to_raster(vector_images, side=28, line_diameter=16, padding=16, bg_co
         data = surface.get_data()
         raster_image = np.copy(np.asarray(data)[::4])
         raster_images.append(raster_image)
-
-        """
-        format = surface.get_format()
-        size = (surface.get_width(), surface.get_height())
-        stride = surface.get_stride()
-
-        image = None
-
-        with surface.get_data() as memory:
-            if format == cairo.Format.RGB24:
-                image =  Image.frombuffer(
-                    "RGB", size, memory.tobytes(),
-                    'raw', "BGRX", stride)
-            elif format == cairo.Format.ARGB32:
-                image = Image.frombuffer(
-                    "RGBA", size, memory.tobytes(),
-                    'raw', "BGRa", stride)
-            else:
-                raise NotImplementedError(repr(format))
-
-        image.show()
-        """
         
     return raster_image
 
@@ -101,43 +78,3 @@ def scale_image(aligned_strokes):
             stroke[1][i] = (stroke[1][i] / max_y) * 255
     
     return aligned_strokes
-
-def resample_stroke(stroke):
-    resampled_x = []
-    resampled_y = []
-    length = len(stroke[0])
-    stroke_length = 0.0
-    
-    # Calculate the total length of the stroke
-    for i in range(1, length):
-        dx = stroke[0][i] - stroke[0][i - 1]
-        dy = stroke[1][i] - stroke[1][i - 1]
-        stroke_length += (dx ** 2 + dy ** 2) ** 0.5
-    
-    # Calculate the spacing between points
-    spacing = stroke_length / (length - 1)
-    resampled_x.append(stroke[0][0])
-    resampled_y.append(stroke[1][0])
-    accum_length = 0.0
-    i = 1
-    
-    # Resample the stroke with 1 pixel spacing
-    while i < length:
-        dx = stroke[0][i] - stroke[0][i - 1]
-        dy = stroke[1][i] - stroke[1][i - 1]
-        segment_length = (dx ** 2 + dy ** 2) ** 0.5
-        if accum_length + segment_length >= spacing:
-            # Add a new point with 1 pixel spacing
-            fraction = (spacing - accum_length) / segment_length
-            nx = stroke[0][i - 1] + fraction * dx
-            ny = stroke[1][i - 1] + fraction * dy
-            resampled_x.append(nx)
-            resampled_y.append(ny)
-            stroke[0].insert(i, nx)
-            stroke[1].insert(i, ny)
-            accum_length = 0.0
-        else:
-            accum_length += segment_length
-            i += 1
-    
-    return [resampled_x, resampled_y]
