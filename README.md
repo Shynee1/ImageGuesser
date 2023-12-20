@@ -17,6 +17,7 @@ It can recognize 15 different types of drawings:
 - `Star` 
 - `Sword`
 - `Television`
-- `Effiel Tower`\
+- `Effiel Tower`
+
 This was made as my final project for Brown University's summer AI program. 
 
