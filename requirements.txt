@@ -1,0 +1,6 @@
+# Project dependencies. See the README for details.
+tensorflow
+scikit-learn
+pillow
+rdp
+tkinter
