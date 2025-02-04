@@ -2,6 +2,8 @@
 Want to test your drawing skills? See if my neural network can guess what you are drawing! \
 This model has been trained on Google's [QuickDraw](https://quickdraw.withgoogle.com/data) dataset to recognize hand-drawn doodles
 
+![Demonstration](https://github.com/user-attachments/assets/059889b0-e3f1-4bdd-b67b-7c094f75131f)
+
 ## Table of Contents
 - [Features](#features)
 - [Setup & Installation](#setup--installation)
